@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include partials/head %>
+</head>
+<body class="body-2">
+  <% include partials/header %>
+  <div class="container w-container">
+    <% matches.forEach(function(match, index){ %>
+      <div class="match">
+        <div class="row w-row">
+          <div class="w-col w-col-9">
+            <div class="text-block-5">
+              <%- match['team-a'].name %> x 
+              <%- match['team-b'].name %>
+            </div>
+          </div>
+          <div class="w-col w-col-3"><a class="watch-game-btn" href="/match/<%- index %>">Acompanhar</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+  <% include partials/footer %>
+</body>
+</html>

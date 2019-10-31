@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../partials/head %>
+</head>
+
+<body class="body-2">
+  <% include ../partials/header-admin %>
+    <div class="container w-container">
+      <h1>
+        <%- match['team-a'].abbr %> x
+          <%- match['team-b'].abbr %>
+      </h1>
+      <div class="match">
+        <div class="row w-row">
+          <div class="w-col w-col-12">
+            <div class="text-block-5">
+              <h3>Placar</h3>
+              <h4>
+                <%- match['team-a'].abbr %> <input type="number" id="score-a" min="0" value="0" /></h4>
+              <h4>
+                <%- match['team-b'].abbr %> <input type="number" id="score-b" min="0" value="0" /></h4>
+              <h4>Notificar gol <input type="checkbox" id="score-notify" value="1" /></h4>
+              <button class="watch-game-btn" id="update-score">Atualizar placar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="match">
+        <div class="row w-row">
+
+          <div class="w-col w-col-7">
+            <div>
+              <h1 class="bid-bid-title">Lance a Lance</h1>
+            </div>
+            <div>
+              <% match.bids.forEach(function(bid){ %>
+                <div class="move w-row">
+                  <div class="w-col w-col-3">
+                    <div class="when"><span class="time-minutes"><%- bid.time %>'</span>
+                      <br>
+                      <%- bid.half %> Tempo</div>
+                  </div>
+                  <div class="w-col w-col-9">
+                    <div class="div-block">
+                      <div><br>
+                        <%- bid.team %>
+                          <br>
+                          <%- bid.subject %>
+                            <br>
+                            <%- bid.description %>
+                      </div>
+                      <div class="time-marker"></div>
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+            </div>
+          </div>
+          <div class="w-col w-col-5">
+            <div class="text-block-5">
+              <h3>Novo Lance</h3>
+              <input type="text" id="bid-time" placeholder="Minutos" />
+              <input type="text" id="bid-half" placeholder="Tempo" />
+              <input type="text" id="bid-team" placeholder="Time" />
+              <input type="text" id="bid-subject" placeholder="Assunto" />
+              <textarea id="bid-description" placeholder="Descrição"></textarea>
+              <a class="watch-game-btn" id="bid-new">Enviar lance</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="videos">
+        <div class="w-container">
+          <h1 class="videos-title">Vídeos</h1>
+          <div>
+            <div class="w-row">
+              <% match.videos.forEach(function(video){ %>
+                <div class="video w-col w-col-3">
+                  <div class="video-container">
+                    <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
+                      <iframe class="embedly-embed" src="https://www.youtube.com/embed/<%- video %>" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+            </div>
+          </div>
+          <div class="text-block-5">
+            <h3>Novo Vídeo</h3>
+            <input type="text" id="video-id" placeholder="ID Vídeo" />
+            <a class="watch-game-btn" id="video-new">Enviar vídeo</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <script>const MATCH_INDEX = "<%- id %>";</script>
+    <% include ../partials/footer %>
+    <script src="/js/admin.js"></script>
+</body>
+
+</html>

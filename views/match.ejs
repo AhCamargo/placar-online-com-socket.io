@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include partials/head %>
+</head>
+<body class="body">
+  <% include partials/header %>
+  <div class="live-section">
+    <div class="w-container">
+      <div class="w-row">
+        <div class="live-container w-col w-col-2">
+          <div class="title-live"><span class="live-bullet"> </span> AO VIVO</div>
+        </div>
+        <% matches.forEach(function(match, index){ %>
+          <div class="match-active w-col w-col-2">
+            <div class="text-block-2"><%- match.championship.abbr %></div>
+            <div class="text-block-3"><%- match['team-a'].abbr %> <em class="match-<%- index %>-a"><%- match['team-a'].score %></em>
+              <br><%- match['team-b'].abbr %> <span><em class="match-<%- index %>-b"><%- match['team-b'].score %></em></span>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+  <div class="match-info">
+    <div class="w-container">
+      <h3 class="match-type"><%- match.championship.name %> <em class="match-type-em">Rodada 1</em></h3>
+    </div>
+    <div class="match-summary w-container">
+      <div class="team-a">
+        <div class="team-name"><%- match['team-a'].name %></div><img class="team-badge" height="70" src="/images/escudos/<%- match['team-a'].badge %>">
+      </div>
+      <div class="match-result">
+        <div class="text-block"><span class="score-team-a"><%- match['team-a'].score %></span> <span class="vs">x</span> <span class="score-team-b"><%- match['team-b'].score %></span></div>
+      </div>
+      <div class="team-b"><img class="team-badge" height="70" src="/images/escudos/<%- match['team-b'].badge %>" >
+        <div class="team-name"><%- match['team-b'].name %></div>
+      </div>
+    </div>
+  </div>
+  <div class="supporters">
+    <div class="supporters-container w-container">
+      <div class="w-row">
+        <div class="column w-col w-col-2"><a class="button w-button" id="na-torcida-a" href="#">Na Torcida</a>
+        </div>
+        <div class="w-clearfix w-col w-col-8">
+          <div class="bar-team-a" style="width: <%- match.porcentagem.teamA %>%"></div>
+          <div class="bar-team-b" style="width: <%- match.porcentagem.teamB %>%"></div>
+        </div>
+        <div class="column-2 w-col w-col-2"><a class="button w-button" id="na-torcida-b" href="#">Na Torcida</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="videos">
+    <div class="w-container">
+      <h1 class="videos-title">Vídeos</h1>
+      <div>
+        <div class="w-row" id="videos-wrapper">
+          <% match.videos.forEach(function(video){ %>
+          <div class="video w-col w-col-3">
+            <div class="video-container">
+              <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
+                <iframe class="embedly-embed" src="https://www.youtube.com/embed/<%- video %>" frameborder="0" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+          <script id="video-template" type="text/x-handlebars-template">
+            <div class="video w-col w-col-3">
+              <div class="video-container">
+                <div class="w-embed w-video" style="padding-top: 56.17021276595745%;">
+                  <iframe class="embedly-embed" src="https://www.youtube.com/embed/{{video}}" frameborder="0" allowfullscreen></iframe>
+                </div>
+              </div>
+            </div>
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="w-container">
+      <div class="w-row">
+        <div class="w-col w-col-7">
+          <div>
+            <h1 class="bid-bid-title">Lance a Lance</h1>
+          </div>
+          <div id="bids-wrapper">
+            <% match.bids.forEach(function(bid){ %>
+            <div class="move w-row">
+              <div class="w-col w-col-3">
+                <div class="when"><span class="time-minutes"><%- bid.time %>'</span>
+                  <br><%- bid.half %> Tempo</div>
+              </div>
+              <div class="w-col w-col-9">
+                <div class="div-block">
+                  <div><br><%- bid.team %>
+                    <br><%- bid.subject %>
+                    <br><%- bid.description %></div>
+                  <div class="time-marker"></div>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+            <script id="bid-template" type="text/x-handlebars-template">
+              <div class="move w-row">
+                <div class="w-col w-col-3">
+                  <div class="when"><span class="time-minutes">{{time}}'</span>
+                    <br>{{half}} Tempo</div>
+                </div>
+                <div class="w-col w-col-9">
+                  <div class="div-block">
+                    <div><br>{{team}}
+                      <br>{{subject}}
+                      <br>{{description}}</div>
+                    <div class="time-marker"></div>
+                  </div>
+                </div>
+              </div>
+            </script>
+          </div>
+        </div>
+        <div class="w-col w-col-5">
+          <div class="players">
+            <h3 class="match-card-title">Ficha de Jogo</h3>
+            <div class="summary">
+              <div>
+                <div class="w-row">
+                  <div class="w-col w-col-4">
+                    <div class="summary-team-a-name"><%- match['team-a'].abbr %></div>
+                  </div>
+                  <div class="w-col w-col-2"><img height="60" src="/images/escudos/<%- match['team-a'].badge %>">
+                  </div>
+                  <div class="w-col w-col-2"><img height="60" src="/images/escudos/<%- match['team-b'].badge %>">
+                  </div>
+                  <div class="column-3 w-col w-col-4">
+                    <div class="summary-tam-b-name"><%- match['team-b'].abbr %></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="players-list">
+              <div class="w-row">
+                <div class="w-col w-col-6">
+                  <ul class="w-list-unstyled">
+                    <% match['team-a'].players.forEach(function(player){ %>
+                    <li class="summary-team-a-li"><%- player.name %> <span class="position"><%- player.pos %></span>
+                    </li>
+                    <% }) %>
+                  </ul>
+                </div>
+                <div class="w-col w-col-6">
+                  <ul class="summary-team-b w-list-unstyled">
+                  <% match['team-b'].players.forEach(function(player){ %>
+                    <li class="summary-team-b-li"><span class="position"><%- player.pos %></span><%- player.name %></li>
+                  <% }) %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const MATCH_INDEX = "<%- id %>";
+  </script>
+  <% include partials/footer %>
+  <script src="/js/match.js"></script>
+  
+  <div class="goooolllll">
+    <div class="goooolllll-text">GOOOOOOOOOOOLLLLL!!!!</div>
+  </div>
+  <audio id="audio-gol" src="/audios/gool-curto2.wav"></audio>
+</body>
+</html>
